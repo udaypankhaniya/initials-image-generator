@@ -35,7 +35,8 @@ export async function GET(request: NextRequest) {
     const { data, contentType } = await generateInitialsImage(
       validation.validatedParams!
     );
-
+    console.log(data);
+    
     return new NextResponse(
       data instanceof Buffer ? data : data, // Buffer or string
       {
