@@ -42,13 +42,7 @@ export function validateImageParams(params: ImageGenerationParams): {
   const height = params.height ? Number(params.height) : 200;
   const width = params.width ? Number(params.width) : 200;
   
-  if (isNaN(height) || height < 100 || height > 1000) {
-    errors.push('Height must be a number between 100 and 1000');
-  }
-  
-  if (isNaN(width) || width < 100 || width > 1000) {
-    errors.push('Width must be a number between 100 and 1000');
-  }
+
   
   // Validate colors
   const color = params.color || '#000000';
@@ -64,12 +58,12 @@ export function validateImageParams(params: ImageGenerationParams): {
   
   // Validate radius
   const radius = params.radius ? Number(params.radius) : 0;
-  if (isNaN(radius) || radius < 0 || radius > 100) {
-    errors.push('Radius must be a number between 0 and 100');
+  if (isNaN(radius) || radius < 0 || radius > 50) {
+    errors.push('Radius must be a number between 0 and 50');
   }
   
   // Validate gradient
-  const gradient = params.gradient === true;
+  const gradient = params.gradient === true ;
   const gradientDirection = params.gradientDirection || 'to bottom';
   const gradientColor = params.gradientColor || color;
   
@@ -101,8 +95,7 @@ export function validateImageParams(params: ImageGenerationParams): {
       gradient,
       gradientDirection,
       gradientColor,
-      imageType: params.imageType || 'svg',
-
-    }
+      imageType: params.imageType || 'png'
+        }
   };
 }

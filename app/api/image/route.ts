@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { validateImageParams } from "@/lib/validation";
 import { generateInitialsImage } from "@/lib/imageGenerator";
-import { ApiError } from "@/types";
+import { ImageGenerationParams } from "@/types";
 
 export const dynamic = "force-dynamic";
 
@@ -9,41 +9,27 @@ export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams;
 
-    const params = {
+    // Parse parameters
+    const params: ImageGenerationParams = {
       name: searchParams.get("name") || "",
-      height: searchParams.get("height")
-        ? Number(searchParams.get("height"))
-        : undefined,
-      width: searchParams.get("width")
-        ? Number(searchParams.get("width"))
-        : undefined,
-      color: searchParams.get("color")
-        ? decodeURIComponent(searchParams.get("color")!)
-        : undefined,
-      bcolor: searchParams.get("bcolor")
-        ? decodeURIComponent(searchParams.get("bcolor")!)
-        : undefined,
-      radius: searchParams.get("radius")
-        ? Number(searchParams.get("radius"))
-        : undefined,
+      width: searchParams.get("width") ? Number(searchParams.get("width")) : undefined,
+      height: searchParams.get("height") ? Number(searchParams.get("height")) : undefined,
+      color: searchParams.get("color") || undefined,
+      bcolor: searchParams.get("bcolor") || undefined,
+      radius: searchParams.get("radius") ? Number(searchParams.get("radius")) : undefined,
       gradient: searchParams.get("gradient") === "true",
       gradientDirection: searchParams.get("gradientDirection") || undefined,
-      gradientColor: searchParams.get("gradientColor")
-        ? decodeURIComponent(searchParams.get("gradientColor")!)
-        : undefined,
-      imageType: searchParams.get("imageType") || "svg",
+      gradientColor: searchParams.get("gradientColor") || undefined,
+      imageType: searchParams.get("imageType") || undefined,
     };
 
     // Validate parameters
     const validation = validateImageParams(params);
-
     if (!validation.isValid) {
-      const error: ApiError = {
-        error: "Invalid parameters",
-        details: validation.errors.join(", "),
-      };
-
-      return NextResponse.json(error, { status: 400 });
+      return NextResponse.json(
+        { error: "Invalid parameters", details: validation.errors },
+        { status: 400 }
+      );
     }
 
     const { data, contentType } = await generateInitialsImage(
@@ -67,7 +53,7 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error("Error generating image:", error);
 
-    const apiError: ApiError = {
+    const apiError = {
       error: "Internal server error",
       details: "Failed to generate image",
     };
