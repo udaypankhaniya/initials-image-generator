@@ -1,165 +1,171 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ImageIcon, Palette, Settings, Zap, Github, Menu } from "lucide-react";
+import { ImageIcon, Palette, Settings, Zap, Github } from "lucide-react";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 
-// Dynamic import for GitHubStats
-const GitHubStats = dynamic(() => import("@/components/GitHubStats"), {
-  ssr: true,
-});
+// Dynamic imports
+const GitHubStats = dynamic(() => import("@/components/GitHubStats"), { ssr: true });
+const Header = dynamic(() => import("@/components/Header"), { ssr: true });
 
-const Header = dynamic(() => import("@/components/Header"), {
-  ssr: true,
-})
-// Define metadata for SEO
+// Smooth scrolling polyfill
+
+
+// Metadata with favicon
 export const metadata: Metadata = {
-  title: "Initials Image Generator - Open Source Avatar Creator",
+  title: "Initials Image Generator - Custom Avatars & Profiles",
   description:
-    "Create custom initials images with personalized colors and dimensions. An open-source project built with Next.js, TypeScript, and Canvas. Contribute on GitHub!",
+    "Create professional avatars and initials images with custom colors and sizes using our open-source tool built with Next.js, TypeScript, and Canvas. ",
   openGraph: {
-    title: "Initials Image Generator",
+    title: "Initials Image Generator - Custom Avatars",
     description:
-      "Generate beautiful initials images for avatars, placeholders, and branding. Open source and community-driven.",
+      "Generate customizable avatars for profiles, branding, or placeholders. Open-source and community-driven.",
     url: "https://initials-image-generator-mauve.vercel.app",
-    images: ["/og-image.png"],
+    images: ["/favicon.ico"],
+  },
+  icons: {
+    icon: "/favicon.ico",
   },
 };
 
 export default function Home() {
-
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-blue-50 font-inter">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-blue-50 font-inter text-gray-900">
       {/* Header */}
-    <Header />
+      <Header />
 
       {/* Hero Section */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-        <div className="text-center animate-fade-in">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-4 sm:mb-6 leading-tight">
-            Create Stunning
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-600">
-              {" "}
-              Initials Images
-            </span>
+      <main
+        id="hero"
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 animate-fade-in"
+      >
+        <div className="text-center">
+          <h2 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight text-gray-900">
+            Create Professional
+            <span className="block text-indigo-600">Avatars & Initials</span>
           </h2>
-          <p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-8 sm:mb-10 max-w-3xl mx-auto leading-relaxed">
-            Generate custom initials images with personalized colors and
-            dimensions. Perfect for avatars, placeholders, and branding. Join
-            our open-source community!
+          <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 mb-6 max-w-3xl mx-auto leading-relaxed">
+            Design customizable avatars and initials images with tailored colors, sizes, and styles, perfect for digital profiles, branding, or placeholders.
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+          <p className="text-base sm:text-lg text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed">
+            Our high-performance canvas rendering engine generates avatars instantly, optimized for modern web applications and seamless user experiences.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/app">
               <Button
                 size="lg"
-                className="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white rounded-full px-6 sm:px-8 py-3 text-base sm:text-lg font-medium transition-all duration-300 ease-in-out transform hover:scale-105"
+                className="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white rounded-full px-8 py-3 text-lg font-medium transition-all duration-300 hover:scale-105 hover:shadow-indigo"
               >
-                Start Creating Images
+                Create Your Avatar
               </Button>
             </Link>
             <Link href="https://github.com/udaypankhaniya/initials-image-generator">
               <Button
                 variant="outline"
                 size="lg"
-                className="w-full sm:w-auto flex justify-center items-center space-x-2 border-indigo-200 text-indigo-600 hover:bg-indigo-50 rounded-full px-6 sm:px-8 py-3 text-base sm:text-lg font-medium transition-all duration-300 ease-in-out transform hover:scale-105"
+                className="w-full sm:w-auto flex items-center space-x-2 border-indigo-200 text-indigo-600 hover:bg-indigo-50 rounded-full px-8 py-3 text-lg font-medium transition-all duration-300 hover:scale-105 hover:shadow-indigo"
               >
-                <Github className="h-4 w-4 sm:h-5 sm:w-5" />
+                <Github className="h-5 w-5" />
                 <span>Contribute on GitHub</span>
               </Button>
             </Link>
           </div>
         </div>
 
+        {/* Use Cases Section */}
+        <div
+          id="use-cases"
+          className="mt-20 animate-slide-up"
+        >
+          <h3 className="text-3xl font-bold text-gray-900 mb-6 text-center">
+            Why Use Our Avatar Generator?
+          </h3>
+          <p className="text-lg text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed text-center">
+            From enhancing user profiles on social platforms to creating consistent branding for businesses, our tool delivers versatile, high-quality avatars for diverse professional applications.
+          </p>
+        </div>
+
         {/* GitHub Stats */}
-        <div className="mt-12 sm:mt-16">
+        <div
+          id="stats"
+          className="mt-16 animate-fade-in"
+        >
           <GitHubStats />
         </div>
 
         {/* Features */}
-        <div className="mt-16 sm:mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          <div className="text-center p-6 sm:p-8 rounded-2xl bg-white shadow-md border border-gray-100 hover:shadow-xl transition-all duration-300 ease-in-out animate-slide-up">
-            <div className="mx-auto w-12 h-12 sm:w-14 sm:h-14 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
-              <Zap className="h-5 w-5 sm:h-6 sm:w-6 text-indigo-600" />
+        <div
+          id="features"
+          className="mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          {[
+            {
+              icon: <Zap className="h-6 w-6 text-indigo-600" />,
+              title: "High Performance",
+              desc: "Generate high-quality avatars instantly with our optimized canvas rendering engine, ensuring seamless performance across modern web and mobile applications.",
+            },
+            {
+              icon: <Palette className="h-6 w-6 text-indigo-600" />,
+              title: "Fully Customizable",
+              desc: "Tailor avatars with diverse color palettes, custom dimensions, and font styles to align perfectly with your brand or personal aesthetic preferences.",
+            },
+            {
+              icon: <Settings className="h-6 w-6 text-indigo-600" />,
+              title: "Open Source Core",
+              desc: "Contribute to our GitHub repository, integrate our free API, or customize the tool to meet your project’s specific requirements.",
+            },
+          ].map((feature, i) => (
+            <div
+              key={i}
+              className={`text-center p-8 rounded-2xl bg-white/95 backdrop-blur-sm border border-indigo-100 hover:shadow-indigo transition-all duration-300 animate-slide-up delay-${i * 200}`}
+            >
+              <div className="mx-auto w-14 h-14 bg-indigo-50 rounded-lg flex items-center justify-center mb-4">
+                {feature.icon}
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">{feature.title}</h3>
+              <p className="text-base text-gray-600 leading-relaxed">{feature.desc}</p>
             </div>
-            <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3">
-              Lightning Fast
-            </h3>
-            <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-              Generate high-quality initials images instantly with our optimized
-              canvas rendering engine.
-            </p>
-          </div>
-
-          <div className="text-center p-6 sm:p-8 rounded-2xl bg-white shadow-md border border-gray-100 hover:shadow-xl transition-all duration-300 ease-in-out animate-slide-up">
-            <div className="mx-auto w-12 h-12 sm:w-14 sm:h-14 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-              <Palette className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />
-            </div>
-            <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3">
-              Fully Customizable
-            </h3>
-            <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-              Choose from unlimited color combinations and dimensions to match
-              your brand or style.
-            </p>
-          </div>
-
-          <div className="text-center p-6 sm:p-8 rounded-2xl bg-white shadow-md border border-gray-100 hover:shadow-xl transition-all duration-300 ease-in-out animate-slide-up">
-            <div className="mx-auto w-12 h-12 sm:w-14 sm:h-14 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-              <Settings className="h-5 w-5 sm:h-6 sm:w-6 text-green-600" />
-            </div>
-            <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3">
-              Open Source
-            </h3>
-            <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-              Contribute to our GitHub repo, access the source code, and
-              integrate our API for free.
-            </p>
-          </div>
+          ))}
         </div>
 
         {/* Open Source Section */}
-        <div className="mt-16 sm:mt-20 bg-gray-900 rounded-2xl p-6 sm:p-8 lg:p-10 text-white animate-slide-up">
-          <h3 className="text-2xl sm:text-3xl font-bold mb-4">
-            Open Source & Community Driven
-          </h3>
-          <p className="text-base sm:text-lg text-gray-200 mb-6 leading-relaxed">
+        <div
+          id="open-source"
+          className="mt-20 bg-white/95 backdrop-blur-sm rounded-2xl p-8 lg:p-12 animate-fade-in"
+        >
+          <h3 className="text-3xl font-bold text-gray-900 mb-4">Open Source Innovation</h3>
+          <p className="text-lg text-gray-600 mb-6 leading-relaxed">
             Initials Image Generator is an open-source project hosted on{" "}
             <a
               href="https://github.com/udaypankhaniya/initials-image-generator"
-              className="text-indigo-400 hover:underline"
+              className="text-indigo-600 hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
               GitHub
             </a>
-            . Join our community to contribute features, fix bugs, or suggest
-            improvements. Your contributions shape the future of this tool!
+            . Join our global community to enhance avatar creation using Next.js, TypeScript, and Canvas API technologies.
           </p>
-          <div className="bg-gray-800 rounded-lg p-4 sm:p-6 mb-6">
-            <p className="text-gray-200 mb-2 text-sm sm:text-base">Example API Usage:</p>
-            <code className="text-green-400 text-xs sm:text-sm font-mono break-all">
-              GET
-              /api/image?name=John+Doe&width=300&height=300&color=%23FF0000&bcolor=%230000FF
+          <p className="text-base text-gray-600 mb-6 leading-relaxed">
+            Contribute innovative features, report issues, or propose enhancements to shape the future of this tool for developers, designers, and businesses worldwide.
+          </p>
+          <div className="bg-indigo-50 rounded-lg p-6 mb-6">
+            <p className="text-gray-600 mb-2 text-base">Example API Usage:</p>
+            <code className="text-indigo-700 text-sm font-mono break-all">
+              GET /api/image?name=John+Doe&width=300&height=300&color=%23FF0000&bcolor=%230000FF
             </code>
           </div>
-          <div className="flex flex-wrap gap-2 sm:gap-3 text-xs sm:text-sm">
-            <span className="bg-indigo-600 px-3 py-1 rounded-full">
-              TypeScript
-            </span>
-            <span className="bg-green-600 px-3 py-1 rounded-full">Next.js</span>
-            <span className="bg-blue-600 px-3 py-1 rounded-full">
-              Tailwind CSS
-            </span>
-            <span className="bg-yellow-600 px-3 py-1 rounded-full">
-              Canvas API
-            </span>
+          <div className="flex flex-wrap gap-3 text-sm">
+            <span className="bg-indigo-600 text-white px-3 py-1 rounded-full">TypeScript</span>
+            <span className="bg-indigo-600 text-white px-3 py-1 rounded-full">Next.js</span>
+            <span className="bg-indigo-600 text-white px-3 py-1 rounded-full">Tailwind CSS</span>
+            <span className="bg-indigo-600 text-white px-3 py-1 rounded-full">Canvas API</span>
           </div>
-          <div className="mt-6 sm:mt-8">
+          <div className="mt-8">
             <Link href="https://github.com/udaypankhaniya/initials-image-generator/blob/main/CONTRIBUTING.md">
               <Button
                 variant="secondary"
-                className="bg-white text-indigo-600 hover:bg-gray-100 rounded-full px-6 sm:px-8 py-2 sm:py-3 text-sm sm:text-base font-medium transition-all duration-300 ease-in-out transform hover:scale-105"
+                className="bg-indigo-600 text-white hover:bg-indigo-700 rounded-full px-8 py-3 text-base font-medium transition-all duration-300 hover:scale-105 hover:shadow-indigo"
               >
                 Read Contribution Guidelines
               </Button>
@@ -168,32 +174,32 @@ export default function Home() {
         </div>
 
         {/* CTA */}
-        <div className="mt-16 sm:mt-20 text-center animate-slide-up">
-          <div className="bg-gradient-to-r from-indigo-600 to-blue-600 rounded-2xl p-8 sm:p-10 lg:p-12 text-white">
-            <h3 className="text-2xl sm:text-3xl font-bold mb-4">
-              Join the Open Source Community
-            </h3>
-            <p className="text-base sm:text-lg text-gray-100 mb-6 sm:mb-8 leading-relaxed">
-              Create stunning initials images and contribute to our open-source
-              project on GitHub.
+        <div
+          id="cta"
+          className="mt-20 text-center animate-slide-up"
+        >
+          <div className="bg-gradient-to-r from-indigo-600 to-blue-600 rounded-2xl p-10 lg:p-12 text-white">
+            <h3 className="text-3xl font-bold mb-4">Join the Avatar Creation Community</h3>
+            <p className="text-lg mb-8 leading-relaxed">
+              Build professional avatars and contribute to our open-source ecosystem, driving innovation in digital identity solutions for modern applications.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/app">
                 <Button
                   size="lg"
                   variant="secondary"
-                  className="w-full sm:w-auto bg-white text-indigo-600 hover:bg-gray-100 rounded-full px-6 sm:px-8 py-3 text-base sm:text-lg font-medium transition-all duration-300 ease-in-out transform hover:scale-105"
+                  className="w-full sm:w-auto bg-white text-indigo-600 hover:bg-gray-100 rounded-full px-8 py-3 text-lg font-medium transition-all duration-300 hover:scale-105 hover:shadow-indigo"
                 >
-                  Create Your First Image
+                  Create Your First Avatar
                 </Button>
               </Link>
               <Link href="https://github.com/udaypankhaniya/initials-image-generator">
                 <Button
                   variant="outline"
                   size="lg"
-                  className="w-full sm:w-auto flex justify-center items-center space-x-2 border-white text-indigo-600 hover:bg-indigo-600/20 hover:text-white rounded-full px-6 sm:px-8 py-3 text-base sm:text-lg font-medium transition-all duration-300 ease-in-out transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2"
+                  className="w-full sm:w-auto flex items-center space-x-2 border-white text-indigo-600 hover:bg-indigo-700/30 rounded-full px-8 py-3 text-lg font-medium transition-all duration-300 hover:scale-105 hover:shadow-indigo hover:text-white"
                 >
-                  <Github className="h-4 w-4 sm:h-5 sm:w-5" />
+                  <Github className="h-5 w-5" />
                   <span>Star on GitHub</span>
                 </Button>
               </Link>
@@ -203,16 +209,14 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-gray-100 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+      <footer className="border-t border-indigo-100 bg-white/95 backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center">
             <div className="flex items-center justify-center space-x-2 mb-4">
-              <ImageIcon className="h-5 w-5 sm:h-6 sm:w-6 text-indigo-600" />
-              <span className="font-semibold text-gray-900 text-base sm:text-lg">
-                Initials Image Generator
-              </span>
+              <ImageIcon className="h-6 w-6 text-indigo-600" />
+              <span className="font-semibold text-gray-900 text-lg">Initials Image Generator</span>
             </div>
-            <p className="text-sm sm:text-base text-gray-600 mb-6 leading-relaxed">
+            <p className="text-base text-gray-600 mb-6 leading-relaxed">
               An open-source project by{" "}
               <a
                 href="https://github.com/udaypankhaniya"
@@ -222,12 +226,12 @@ export default function Home() {
               >
                 Uday Pankhaniya
               </a>
-              . Built with Next.js, TypeScript, and Canvas.
+              . Powered by Next.js, TypeScript, and Canvas for professional avatar creation.
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 max-w-md mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-md mx-auto">
               <a
                 href="https://github.com/udaypankhaniya/initials-image-generator"
-                className="text-gray-600 hover:text-indigo-600 transition-colors duration-200 text-sm sm:text-base"
+                className="text-gray-600 hover:text-indigo-600 transition-colors duration-200 text-base"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -235,7 +239,7 @@ export default function Home() {
               </a>
               <a
                 href="https://github.com/udaypankhaniya/initials-image-generator/blob/main/LICENSE"
-                className="text-gray-600 hover:text-indigo-600 transition-colors duration-200 text-sm sm:text-base"
+                className="text-gray-600 hover:text-indigo-600 transition-colors duration-200 text-base"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -243,7 +247,7 @@ export default function Home() {
               </a>
               <a
                 href="https://github.com/udaypankhaniya/initials-image-generator/blob/main/CONTRIBUTING.md"
-                className="text-gray-600 hover:text-indigo-600 transition-colors duration-200 text-sm sm:text-base"
+                className="text-gray-600 hover:text-indigo-600 transition-colors duration-200 text-base"
                 target="_blank"
                 rel="noopener noreferrer"
               >
